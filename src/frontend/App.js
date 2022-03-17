@@ -1,10 +1,14 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Navbar from "./pages/Navbar";
+import Navigation from "./pages/Navbar";
 import { useState } from 'react'
 import { ethers } from "ethers"
 import { Spinner } from 'react-bootstrap'
+import MarketplaceAbi from './contractsData/Marketplace.json'
+import MarketplaceAddress from './contractsData/Marketplace-address.json'
+import NFTAbi from './contractsData/NFT.json'
+import NFTAddress from './contractsData/NFT-address.json'
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -46,12 +50,33 @@ function App() {
         <>
           <Navigation web3Handler={web3Handler} account={account} />
         </>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
+        <div>
+          {loading ? (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
+              <Spinner animation="border" style={{ display: 'flex' }} />
+              <p className='mx-3 my-0'>Awaiting Metamask Connection...</p>
+            </div>
+          ) : (
+            <Routes>
+              <Route path="/" element={
+                <Home marketplace={marketplace} nft={nft} />
+              } />
+              {/* <Route path="/create" element={
+                <Create marketplace={marketplace} nft={nft} />
+              } />
+              <Route path="/my-listed-items" element={
+                <MyListedItems marketplace={marketplace} nft={nft} account={account} />
+              } />
+              <Route path="/my-purchases" element={
+                <MyPurchases marketplace={marketplace} nft={nft} account={account} />
+              } /> */}
+            </Routes>
+          )}
+        </div>
       </div>
     </BrowserRouter>
   );
 }
 
 export default App;
+
