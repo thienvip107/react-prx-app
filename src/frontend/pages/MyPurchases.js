@@ -5,7 +5,7 @@ import { Row, Col, Card } from "react-bootstrap";
 export default function MyPurchases({ marketplace, nft, account }) {
   const [loading, setLoading] = useState(true);
   const [purchases, setPurchases] = useState([]);
-  const loadPurchased = async () => {
+  const loadMarketplaceItems = async () => {
     // Fetch purchased items from marketplace by quering Offered events with the buyer set as the user
     const filter = marketplace.filters.Bought(
       null,

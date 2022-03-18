@@ -9,6 +9,9 @@ import MarketplaceAbi from './contractsData/Marketplace.json'
 import MarketplaceAddress from './contractsData/Marketplace-address.json'
 import NFTAbi from './contractsData/NFT.json'
 import NFTAddress from './contractsData/NFT-address.json'
+import Create from './pages/Create.js'
+import MyPurchases from './pages/MyPurchases.js'
+import MyListedItems from './pages/MyListedItems.js'
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -64,9 +67,9 @@ function App() {
               <Route path="/create" element={
                 <Create marketplace={marketplace} nft={nft} />
               } />
-              <Route path="/my-listed-items" element={
+              { <Route path="/my-listed-items" element={
                 <MyListedItems marketplace={marketplace} nft={nft} account={account} />
-              } />
+              } /> }
               <Route path="/my-purchases" element={
                 <MyPurchases marketplace={marketplace} nft={nft} account={account} />
               } />

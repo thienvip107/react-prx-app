@@ -7,10 +7,10 @@ const Home = ({ marketplace, nft }) => {
   const [items, setItems] = useState([]);
   const loadMarketplaceItems = async () => {
     // Load all unsold items
-    const itemConut = await marketplace.itemConut();
-    let item = [];
-    for (let i = 0; i < item.length; i++) {
-      const items = await marketplace.items(i);
+    const itemCount = await marketplace.itemCount();
+    let items = [];
+    for (let i = 1; i <= itemCount; i++) {
+      const item = await marketplace.items(i);
       if (!item.sold) {
         // get uri url from nft contract
         const uri = await nft.tokenURI(item.tokenId);
@@ -44,7 +44,6 @@ const Home = ({ marketplace, nft }) => {
   useEffect(() => {
     loadMarketplaceItems();
   }, []);
-
   if (loading)
     return (
       <main style={{ padding: "1rem 0" }}>
@@ -88,4 +87,4 @@ const Home = ({ marketplace, nft }) => {
     </div>
   );
 };
-export default Home
+export default Home;
