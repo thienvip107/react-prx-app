@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Navigation from "./pages/Navbar";
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { ethers } from "ethers"
 import { Spinner } from 'react-bootstrap'
 import MarketplaceAbi from './contractsData/Marketplace.json'
@@ -43,17 +43,6 @@ function App() {
     setLoading(false)
   }
 
-  useEffect(async() => {
-    const acc = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    window.ethereum?.request({
-      method: "wallet_switchEthereumChain",
-      params: [{chainId: "0x3"}],
-  });
-  
-  }, [])
-  
 
   return (
     <BrowserRouter>
@@ -72,7 +61,7 @@ function App() {
               <Route path="/" element={
                 <Home marketplace={marketplace} nft={nft} />
               } />
-              {/* <Route path="/create" element={
+              <Route path="/create" element={
                 <Create marketplace={marketplace} nft={nft} />
               } />
               <Route path="/my-listed-items" element={
@@ -80,7 +69,7 @@ function App() {
               } />
               <Route path="/my-purchases" element={
                 <MyPurchases marketplace={marketplace} nft={nft} account={account} />
-              } /> */}
+              } />
             </Routes>
           )}
         </div>
