@@ -18,6 +18,8 @@ function App() {
   const [account, setAccount] = useState(null)
   const [nft, setNFT] = useState({})
   const [marketplace, setMarketplace] = useState({})
+  const overrides = { gasLimit: 4500000, gasPrice: 9000000000 };
+
   // MetaMask Login/Connect
   const web3Handler = async () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -46,7 +48,6 @@ function App() {
     setLoading(false)
   }
 
-
   return (
     <BrowserRouter>
       <div className="App">
@@ -65,13 +66,13 @@ function App() {
                 <Home marketplace={marketplace} nft={nft} />
               } />
               <Route path="/create" element={
-                <Create marketplace={marketplace} nft={nft} />
+                <Create marketplace={marketplace} nft={nft} overrides={overrides} />
               } />
               { <Route path="/my-listed-items" element={
-                <MyListedItems marketplace={marketplace} nft={nft} account={account} />
+                <MyListedItems marketplace={marketplace} nft={nft} account={account} overrides={overrides} />
               } /> }
               <Route path="/my-purchases" element={
-                <MyPurchases marketplace={marketplace} nft={nft} account={account} />
+                <MyPurchases marketplace={marketplace} nft={nft} account={account} overrides={overrides} />
               } />
             </Routes>
           )}
